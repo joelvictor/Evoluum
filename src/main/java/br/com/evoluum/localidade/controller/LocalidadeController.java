@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.evoluum.localidade.dto.TipoRetorno;
 import br.com.evoluum.localidade.service.LocalidadeService;
 import io.swagger.annotations.Api;
 
@@ -31,22 +32,24 @@ public class LocalidadeController {
 	private LocalidadeService localidadeService;
 	
 	@GetMapping
-	public ResponseEntity<?> buscaTodasLocalidadesJSON() {
+	public ResponseEntity<?> buscarTodasLocalidadesJSON() {
 		logger.info("Busca todas as cidades - json");
 		
-		return new ResponseEntity(localidadeService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(localidadeService.buscarTodasLocalidades(TipoRetorno.JSON), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/csv", produces = "text/csv")
 	public ResponseEntity<?> buscarTodasLocalidadesCSV() {
-		logger.info("Busca todas as cidades - json");
-		return null;
+		logger.info("Busca todas as cidades - csv");
+		return new ResponseEntity<>(localidadeService.buscarTodasLocalidades(TipoRetorno.CSV), HttpStatus.OK);
 	}
 	
 	@Cacheable("buscarCidade")
-	public ResponseEntity<?> buscarCidade(String cidade) {
+	@GetMapping("/{nomeMunicipio}")
+	public ResponseEntity<?> buscarMunicipio(String nomeMunicipio) {
 		logger.info("Busca de cidade pelo nome");
 
-		return null;
+		return new ResponseEntity<>(localidadeService.buscarMunicipio(nomeMunicipio), HttpStatus.OK);
 	}
 	
 }

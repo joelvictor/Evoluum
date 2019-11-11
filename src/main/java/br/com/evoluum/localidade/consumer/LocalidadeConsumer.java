@@ -61,7 +61,7 @@ public class LocalidadeConsumer {
 				localidade.setNomeCidade(municipio.getNome());
 				MicrorregiaoDTO microrregiaoDTO = municipio.getMicrorregiao();
 				localidade.setNomeMesorregiao(microrregiaoDTO.getMesorregiao().getNome());
-				localidade.setNomeRegiao(microrregiaoDTO.getNome());
+				localidade.setRegiaoNome(microrregiaoDTO.getNome());
 				return localidade;
 			}).collect(Collectors.toList()));
 		});

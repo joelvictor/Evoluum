@@ -8,7 +8,7 @@ public class LocalidadeDTO {
 	
 	private String siglaEstado;
 	
-	private String nomeRegiao;
+	private String regiaoNome;
 	
 	private String nomeCidade;
 	
@@ -49,17 +49,17 @@ public class LocalidadeDTO {
 	}
 
 	/**
-	 * @return the nomeRegiao
+	 * @return the regiaoNome
 	 */
-	public String getNomeRegiao() {
-		return nomeRegiao;
+	public String getRegiaoNome() {
+		return regiaoNome;
 	}
 
 	/**
-	 * @param nomeRegiao the nomeRegiao to set
+	 * @param regiaoNome the regiaoNome to set
 	 */
-	public void setNomeRegiao(String nomeRegiao) {
-		this.nomeRegiao = nomeRegiao;
+	public void setRegiaoNome(String regiaoNome) {
+		this.regiaoNome = regiaoNome;
 	}
 
 	/**

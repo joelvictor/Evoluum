@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.evoluum.localidade.consumer.LocalidadeConsumer;
 import br.com.evoluum.localidade.dto.LocalidadeDTO;
+import br.com.evoluum.localidade.dto.TipoRetorno;
+import br.com.evoluum.localidade.util.CsvGenerator;
 
 @Service
 public class LocalidadeService {
@@ -18,8 +20,26 @@ public class LocalidadeService {
 	@Autowired
 	private LocalidadeConsumer localidadeConsumer;
 	
-	public List<LocalidadeDTO> findAll() {
-		return localidadeConsumer.getLocalidades();
+	public Object buscarTodasLocalidades(TipoRetorno tipoRetorno) {
+		Object resultado = null;
+		List<LocalidadeDTO> localidades = localidadeConsumer.getLocalidades();
+		switch (tipoRetorno) {
+			case CSV:
+				resultado = CsvGenerator.gerarLocalidadeCSV(localidades);
+			break;
+			case JSON:
+			default:
+				resultado = localidades;
+			break;
+		}
+		
+		return resultado;
+	}
+	
+
+	
+	public Long buscarMunicipio(String nomeMunicipio) {
+		return localidadeConsumer.getMunicipioId(nomeMunicipio);
 	}
 	
 	
